@@ -1,0 +1,11 @@
+.mat-dialog-container {
+    width: auto ;
+    height: auto ;
+  }
+  .cdk-overlay-container {
+    z-index: 9999 !important;
+  }
+
+  .cdk-global-overlay-wrapper {
+    transform: none !important;
+  }

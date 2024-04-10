@@ -1,0 +1,51 @@
+<div class="container py-5">
+  <h1 class="mb-4">Listagem de Pessoas</h1>
+  <!-- Search bar -->
+  <div class="mb-3">
+    <app-search-text (searchTextChange)="onSearchTextChange($event)"></app-search-text>
+  </div>
+
+  <!-- Tabela de listagem de pessoas -->
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Idade</th>
+          <th>CPF</th>
+          <th>Sexo</th>
+          <th>Peso</th>
+          <th>Altura</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- <app-search-text (searchTextChange)="onSearchTextChange($event)"></app-search-text> -->
+        <!-- Linhas da tabela preenchidas com dados de pessoas -->
+        <tr *ngFor="let pessoa of pessoas ">
+          <td>{{ pessoa.id }}</td>
+          <td>{{ pessoa.nome }}</td>
+          <td>{{ calculateAge(pessoa.data_nasc) }}</td>
+          <td>{{pessoa.cpf}}</td>
+          <td *ngIf="pessoa.sexo=='M'">Masculino</td>
+          <td *ngIf="pessoa.sexo=='F'">Feminino</td>
+          <td>{{pessoa.peso}}Kg</td>
+          <td>{{pessoa.altura}}m</td>
+          <td *ngIf="resultIsSearch">
+            <!-- Botões de ação para cada pessoa -->
+            <button class="btn btn-info btn-sm" (click)="editarPessoa(pessoa)">Editar</button>
+            <button class="btn btn-danger btn-sm" (click)="excluirPessoa(pessoa)">Excluir</button>
+            
+          </td>
+          <td *ngIf="!resultIsSearch">Indisponível</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Floating action button for adding a new pessoa -->
+  <button [disabled]="dialogOpened" class="btn btn-primary position-fixed bottom-0 end-0 m-3" style="border-radius: 50%; width: 56px; height: 56px; font-size: 24px; display: flex; align-items: center; justify-content: center;" (click)="adicionarPessoa()">
+    +
+  </button>
+</div>
